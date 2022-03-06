@@ -1,0 +1,23 @@
+<agm-map id="myMap" 
+[latitude]="latitude" 
+[longitude]="longitude" 
+(mapClick)="onChooseLocation($event)"
+[zoom]="zoom" 
+[disableDoubleClickZoom]="true"
+>
+    <agm-marker *ngFor="let stop of stopList" 
+    [latitude]="stop.latitude" 
+    [longitude]="stop.longitude" 
+    [markerDraggable]="false">
+    </agm-marker>
+
+    <agm-polyline [visible]="true" [strokeWeight]="3" [strokeColor]="'#07b57a'">
+        <agm-polyline-point
+        *ngFor="let stop of stopList; let i=index"
+        [latitude]="stop.latitude"
+        [longitude]="stop.longitude"
+        >
+        </agm-polyline-point>
+    </agm-polyline>
+
+</agm-map>

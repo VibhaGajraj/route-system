@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HomeService } from './home/services/home.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'routes-system';
+  constructor(
+    private router: Router,
+    private activatedroute: ActivatedRoute,
+    private homeService: HomeService,
+
+  ) { }
+
+  ngOnInit(): void {
+    this.homeService.setLocallyStoredData(localStorage.getItem('data'));
+    this.router.navigate(['/home']);
+  }
 }
+

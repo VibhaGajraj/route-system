@@ -1,0 +1,23 @@
+<div class="main-component">
+    <div class="header">
+      <div class="left">
+        Routes Table
+      </div>
+      <div class="right">
+        <div class="btn-group">
+          <div class="add-button" (click)="addTask()">
+            <img src="assets/images/plus-white.svg">
+            Add Task
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="list-group">
+      <div class="list-container">
+        <app-table-list
+         (actionPerformed)="actionPerformed($event)"
+        ></app-table-list>
+      </div>
+    </div>
+  </div>
+  

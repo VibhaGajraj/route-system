@@ -1,0 +1,136 @@
+<div class="add-component">
+    <div class="actions">
+      <div class="button cancel" (click)="cancel()">Cancel</div>
+
+      <div class="button dark" (click)="save()">Save Route</div>
+    </div>
+  
+    <form [formGroup]="routeForm">
+      <div class="contaier">
+        <div class="input-container">
+          <div class="header">Name*</div>
+          <input type="text" formControlName="name" />
+        </div>
+        <div
+          class="err"
+          *ngIf="routeForm.controls['name'].errors?.required && (routeForm.controls['name'].dirty || saveClicked)"
+        >
+          Please fill Valid Name
+        </div>
+      </div>
+     <div  class="contaier">
+      <div class="input-container">
+        <div class="header">Direction*</div>
+        <select formControlName="direction">
+          <!-- <option value="" selected>Select direction</option> -->
+          <option name='Direction'[value]="'up'">
+           Up
+          </option>
+          <option name='Direction'[value]="'down'">
+            Down
+           </option>
+      </select>
+      </div>
+      <div
+        class="err"
+        *ngIf="routeForm.controls['direction'].errors?.required && (routeForm.controls['direction'].dirty || saveClicked)"
+      >
+        Please fill Valid direction
+      </div>
+     </div>
+    <div  class="contaier">
+      <div class="input-container">
+        <div class="programDesc">
+          <div class="header">Route Id*</div>
+          <input type="text" formControlName="rId"/>
+      </div>
+      </div>
+      <div
+        class="err"
+        *ngIf="routeForm.controls['rId'].errors?.required && (routeForm.controls['rId'].dirty || saveClicked)"
+      >
+        Please fill Valid Programe route id
+      </div>
+    </div>
+    <div  class="contaier">
+      <div class="input-container">
+        <div class="header">Status*</div>
+        <select formControlName="status">
+          <!-- <option value="" selected>Select status</option> -->
+          <option name='Direction'[value]="'active'">
+           Active
+          </option>
+          <option name='Direction'[value]="'inactive'">
+            Inactive
+           </option>
+      </select>
+      </div>
+      <div
+        class="err"
+        *ngIf="routeForm.controls['status'].errors?.required && (routeForm.controls['status'].dirty || saveClicked)"
+      >
+        Please fill Valid status
+      </div>
+    </div>
+     <div  class="contaier">
+        <div class="label">Admin section*</div>
+        <div class="input">
+          <div class="allowed-stops-ids" (click)="toggleAllowedSectionDropDown($event)">
+            <div class="placeholder" *ngIf="stops.length === 0">
+              Select Admin section
+            </div>
+            <div class="selected-ids" *ngIf="stops.length === 1">
+              {{ stops[0].name }}
+            </div>
+            <div class="selected-ids" *ngIf="stops.length === 2">
+              {{ stops[0].name}},{{ stops[1].name }}
+            </div>
+            <div class="selected-ids" *ngIf="stops.length > 2">
+              {{ stops[0].name}},{{ stops[1].name}} + {{stops.length - 2}} more
+            </div>
+            <div class="arrow" (click)="toggleAllowedSectionDropDown($event)">
+              <img src="assets/images/up-arrow.svg" [class.down]="!showAllowedSectionDropDown" />
+            </div>
+          </div>
+          <div class="err" *ngIf="stops.length === 0 && saveClicked
+          ">Please select Admin stops</div>
+          <div class="stopIds" *ngIf="showAllowedSectionDropDown">
+            <div class="dropdown-close" (click)="showAllowedSectionDropDown=false">
+              <img src="assets/images/close.svg" alt="" />
+            </div>
+            <div class="stop-ids">
+              <div class="plan-id" *ngFor="let item of stops; let i = index">
+                <div class="tick">
+                  <img src="assets/images/tick.png" alt="" />
+                </div>
+                <div class="name">
+                  {{ item.name }}
+                </div>
+                <div class="close" (click)="moveToListOfSection(i)">
+                  <img src="assets/images/close.svg" alt="" />
+                </div>
+              </div>
+            </div>
+            <div class="list" *ngIf="stopsList && stopsList.length > 0">
+              <div class="plan-id" *ngFor="let item of stopsList | searchFilter:newSection; let i = index">
+                <div class="name">
+                  <div class="circle" (click)="moveToAllowedStop(i,item)"></div>
+                  {{ item.name }}
+                </div>
+                <div class="delete" (click)="moveToAllowedStop(i,item)">
+                  <img src="assets/images/add.svg" alt="">
+                </div>
+              </div>
+            </div>
+            <div class="add-new">
+              <input type="text" [(ngModel)]="newSection" placeholder="Search Stop"
+                [ngModelOptions]="{standalone: true}" />
+              <img src="assets/images/search.svg" />
+            </div>
+          </div>
+
+        </div>
+     </div>
+    </form>
+</div>
+  

@@ -1,0 +1,47 @@
+<div class="table-viewer-component">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col" >
+              Name
+          </th>
+          <th scope="col" >
+            Direction
+        </th>
+        <th scope="col" >
+            Route Id
+        </th>
+        <th scope="col" >
+            Status
+        </th>
+        <th scope="col" >
+            Actions
+        </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tabledata of tableData; let i = index;">
+          <td>
+          {{tabledata?.name}}
+         </td>
+         <td>
+            {{tabledata?.direction}}
+           </td>
+           <td>
+            {{tabledata?.rId}}
+           </td>
+           <td>
+            {{tabledata?.status}}
+           </td>
+           <td class="actions">
+            <div *ngFor="let action of tabledata?.actions; let j=index;">
+              <div class="icon-section">
+                  <img [src]="action?.icon" (click)="actionClicked(action,i)">
+              </div>
+            </div>
+           </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
