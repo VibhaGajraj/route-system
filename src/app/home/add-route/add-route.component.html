@@ -73,11 +73,11 @@
       </div>
     </div>
      <div  class="contaier">
-        <div class="label">Admin section*</div>
+        <div class="label">stops*</div>
         <div class="input">
           <div class="allowed-stops-ids" (click)="toggleAllowedSectionDropDown($event)">
             <div class="placeholder" *ngIf="stops.length === 0">
-              Select Admin section
+              Select stops
             </div>
             <div class="selected-ids" *ngIf="stops.length === 1">
               {{ stops[0].name }}
@@ -93,7 +93,7 @@
             </div>
           </div>
           <div class="err" *ngIf="stops.length === 0 && saveClicked
-          ">Please select Admin stops</div>
+          ">Please select stops</div>
           <div class="stopIds" *ngIf="showAllowedSectionDropDown">
             <div class="dropdown-close" (click)="showAllowedSectionDropDown=false">
               <img src="assets/images/close.svg" alt="" />
